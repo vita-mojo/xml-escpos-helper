@@ -1,16 +1,17 @@
-import Mustache from 'mustache';
+import Handlebars from 'handlebars';
 import { XMLParser } from './xml-parser';
 import { BufferBuilder } from './buffer-builder';
 
 export class TemplateParser {
-  private mustache: any;
+  private handlebars: typeof Handlebars;
 
   constructor() {
-    this.mustache = Mustache;
+    this.handlebars = Handlebars;
   }
 
-  public parser(template, scope): BufferBuilder {
-    const xml = this.mustache.render(template, scope);
+  public parser<T>(template: string, scope: T): BufferBuilder {
+    const compiledTemplate = this.handlebars.compile<T>(template);
+    const xml = compiledTemplate(scope);
     return new XMLParser().parser(xml);
   }
 }

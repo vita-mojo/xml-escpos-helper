@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
-    "mustache": "^4.1.0",
+    "handlebars": "^4.7.7",
     "mutable-buffer": "2.0.3",
     "ndarray": "^1.0.19",
     "pngjs": "^6.0.0",

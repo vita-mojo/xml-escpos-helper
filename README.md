@@ -19,7 +19,7 @@ Cross platform JavaScript library that implements the thermal printer ESC / POS 
 - [x] QRcode
 - [x] Paper cut node
 - [x] Image (base64) (png only)
-- [x] XML with mustache
+- [x] XML with Handlebars
 
 
 ## Tested manually on following environments or platforms
