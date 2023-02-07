@@ -1,6 +1,6 @@
 {
-  "name": "@tillpos/xml-escpos-helper",
-  "description": "ESC/POS with XML interface",
+  "name": "@vitamojo/xml-escpos-helper",
+  "description": "ESC/POS with XML interface and Handlebars Support",
   "keywords": [
     "escpos",
     "esc",
@@ -21,20 +21,17 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "yarn  clean && yarn  compile",
-    "build:watch": "yarn compile -- -w",
+    "build": "npm run clean && npm run compile",
+    "build:w": "npm run clean && npm run compile -- -w",
     "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
     "compile": "tsc -p ./tsconfig.build.json"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/hitz-group/xml-escpos-helper.git"
+    "url": "https://github.com/vita-mojo/xml-escpos-helper.git"
   },
-  "contributors": [
-    "Snehit Velma <snehithvelma@gmail.com>"
-  ],
   "bugs": {
-    "url": "https://github.com/hitz-group/xml-escpos-helper/issues"
+    "url": "https://github.com/vita-mojo/xml-escpos-helper/issues"
   },
   "dependencies": {
     "buffer": "^6.0.3",
