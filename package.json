@@ -21,6 +21,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "prepare": "npm run build",
     "build": "npm run clean && npm run compile",
     "build:w": "npm run clean && npm run compile -- -w",
     "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
