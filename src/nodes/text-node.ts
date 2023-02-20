@@ -21,7 +21,7 @@ export default class TextNode extends XMLNode {
   }
 
   public close(bufferBuilder: BufferBuilder): BufferBuilder {
-    bufferBuilder.resetCharacterSize();
+    // bufferBuilder.resetCharacterSize();
     return bufferBuilder;
   }
 

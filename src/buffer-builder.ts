@@ -233,6 +233,11 @@ export class BufferBuilder {
     this.buffer.write(raster.data);
     return this;
   }
+
+  public setEncoding(encoding: ENCODING): BufferBuilder {
+    this.buffer.write(Command.ESC_t(encoding));
+    return this;
+  }
 }
 
 export enum UNDERLINE_MODE {
@@ -304,4 +309,8 @@ export enum RASTER_MODE {
   DOUBLE_WIDTH = 1,
   DOUBLE_HEIGHT = 2,
   DOUBLE_WIDTH_HEIGHT = 3,
+}
+
+export enum ENCODING {
+  UTF8 = 0x0E
 }

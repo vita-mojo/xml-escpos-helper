@@ -23,5 +23,4 @@ export default class AlignNode extends XMLNode {
     bufferBuilder.resetAlign();
     return bufferBuilder;
   }
-
 }

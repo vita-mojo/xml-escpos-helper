@@ -1,5 +1,5 @@
 import { XMLNode } from '../xml-node';
-import { BufferBuilder } from '../buffer-builder';
+import { BufferBuilder, ENCODING } from '../buffer-builder';
 
 export default class DocumentNode extends XMLNode {
 
@@ -11,6 +11,7 @@ export default class DocumentNode extends XMLNode {
     if (this.attributes.reverse)
       bufferBuilder.startReverseMode();
 
+    bufferBuilder.setEncoding(ENCODING.UTF8);
     return bufferBuilder;
   }
 
