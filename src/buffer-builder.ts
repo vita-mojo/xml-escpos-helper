@@ -124,6 +124,17 @@ export class BufferBuilder {
     return this;
   }
 
+  public emphasizedMode(): BufferBuilder {
+    this.buffer.write(Command.ESC_exclamation(0x30));
+    return this;
+  }
+
+  public endEmphasizedMode(): BufferBuilder {
+    this.buffer.write(Command.ESC_exclamation(0x0A));
+    this.buffer.write(Command.ESC_E(0x0A));
+    return this;
+  }
+
   public printBarcode(
     data: string,
     barcodeSystem: BARCODE_SYSTEM,
