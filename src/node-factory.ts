@@ -15,6 +15,7 @@ import ImageNode from './nodes/image-node';
 import OpenCashDrawerNode from './nodes/open-cash-drawer-node';
 import PrintModeNode from './nodes/print-mode';
 import EmphasizedNode from './nodes/emphasized-node';
+import ColorNode from './nodes/color-node';
 
 export class NodeFactory {
 
@@ -37,6 +38,7 @@ export class NodeFactory {
       case 'image':       return new ImageNode(node);
       case 'print-mode':  return new PrintModeNode(node);
       case 'emphasized': return new EmphasizedNode(node);
+      case 'secondary-color': return new ColorNode(node);
       default:           return null;
     }
   }

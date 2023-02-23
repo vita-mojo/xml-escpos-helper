@@ -249,6 +249,11 @@ export class BufferBuilder {
     this.buffer.write(Command.ESC_t(encoding));
     return this;
   }
+
+  public setColor(color: COLOR): BufferBuilder {
+    this.buffer.write(Command.ESC_r(color));
+    return this;
+  }
 }
 
 export enum UNDERLINE_MODE {
@@ -324,4 +329,9 @@ export enum RASTER_MODE {
 
 export enum ENCODING {
   UTF8 = 0x0E
+}
+
+export enum COLOR {
+  PRIMARY = 0x00,
+  SECONDARY = 0x01,
 }
