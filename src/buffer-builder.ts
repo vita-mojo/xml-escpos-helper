@@ -254,6 +254,22 @@ export class BufferBuilder {
     this.buffer.write(Command.ESC_r(color));
     return this;
   }
+
+  public printLogo(
+    keyCode1: number,
+    keyCode2: number,
+    scaleWidth: 1 | 2,
+    scaleHeight: 1 | 2,
+  ): BufferBuilder {
+    this.buffer.write(Command.GS_par_L(
+      keyCode1,
+      keyCode2,
+      scaleWidth,
+      scaleHeight,
+    ));
+
+    return this;
+  }
 }
 
 export enum UNDERLINE_MODE {
