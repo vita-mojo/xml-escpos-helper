@@ -10,10 +10,15 @@ export default class PrintLogoNode extends XMLNode {
   public open(bufferBuilder: BufferBuilder): BufferBuilder {
     if (
         !this.attributes.kc1 ||
-        !this.attributes.kc2 ||
-        isNaN(this.attributes.kc1) ||
-        isNaN(this.attributes.kc2)
+        !this.attributes.kc2
     ) {
+        return;
+    }
+
+    const kc1 = Number(this.attributes.kc1);
+    const kc2 = Number(this.attributes.kc2);
+
+    if (isNaN(kc1) || isNaN(kc2)) {
         return;
     }
 
@@ -26,8 +31,8 @@ export default class PrintLogoNode extends XMLNode {
         : 0x01;
 
     return bufferBuilder.printLogo(
-        this.attributes.kc1,
-        this.attributes.kc2,
+        kc1,
+        kc2,
         scaleWidth,
         scaleHeight,
     );
