@@ -1,7 +1,7 @@
 import { XMLNode } from '../xml-node';
 import { BufferBuilder, COLOR } from '../buffer-builder';
 
-export default class PrintLogoNode extends XMLNode {
+export default class LogoNode extends XMLNode {
 
   constructor(node: any) {
     super(node);
