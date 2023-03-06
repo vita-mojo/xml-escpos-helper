@@ -37,11 +37,12 @@ export default class ImageNode extends XMLNode {
         mode = RASTER_MODE.NORMAL;
     }
 
-    bufferBuilder.printImage(new Image(pixels), mode);
+    bufferBuilder.storeImage(new Image(pixels), mode);
     return bufferBuilder;
   }
 
   public close(bufferBuilder: BufferBuilder): BufferBuilder {
+    bufferBuilder.printImage();
     return bufferBuilder;
   }
 }

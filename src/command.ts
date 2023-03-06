@@ -48,6 +48,8 @@ export class Command {
     Command.GS, 0x28, 0x4C, 0x06, 0x00, 0x30, 0x45, kc1, kc2, x, y
   ]; //GS(L
 
+  public static GS_par_L_112 = () => [Command.GS, 0x28, 0x4C]; //GS(L - 112
+
   public static LF: number[] = [Command.NL];
 
 
