@@ -233,7 +233,7 @@ export class BufferBuilder {
     return this;
   }
 
-  public storeImage(image: Image, mode: RASTER_MODE): BufferBuilder {
+  public storeImage(image: Image, mode: RASTER_MODE, img_data: any): BufferBuilder {
     if (!(image instanceof Image)) {
       throw new TypeError("not supported");
     }
@@ -241,8 +241,8 @@ export class BufferBuilder {
     this.buffer.write(Command.GS_par_L_112());
     this.buffer.writeUInt16LE(raster.data.length + 10);
     this.buffer.write([ 0x30, 0x70, 0x30, 0x01, 0x01, 0x31 ]);
-    this.buffer.writeUInt16LE(raster.width);
-    this.buffer.writeUInt16LE(raster.height);
+    this.buffer.writeUInt16LE(img_data.width);
+    this.buffer.writeUInt16LE(img_data.height);
     this.buffer.write(raster.data);
     return this;
   }
