@@ -238,6 +238,7 @@ export class BufferBuilder {
       throw new TypeError("not supported");
     }
     const raster = image.toRaster();
+    this.buffer.write([ 0x1B, 0x33, 0x24 ]);
     this.buffer.write(Command.GS_v0(mode));
     this.buffer.writeUInt16LE(raster.width);
     this.buffer.writeUInt16LE(raster.height);
