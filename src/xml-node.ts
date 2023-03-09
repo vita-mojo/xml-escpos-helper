@@ -30,8 +30,8 @@ export abstract class XMLNode {
     // open tag
     await this.open(bufferBuilder);
 
-    for (let i=0; i<this.children.length; i++) {
-      await this.children[i].draw(bufferBuilder);
+    for (const child of this.children) {
+      await child.draw(bufferBuilder);
     }
 
     // close tag
