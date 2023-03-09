@@ -233,18 +233,18 @@ export class BufferBuilder {
     return this;
   }
 
-  public storeImage(image: Image, mode: RASTER_MODE, img_data: any): BufferBuilder {
-    if (!(image instanceof Image)) {
-      throw new TypeError("not supported");
-    }
+  public storeImage(image: string, mode: RASTER_MODE, width: number, height: number): BufferBuilder {
+    // if (!(image instanceof Image)) {
+    //   throw new TypeError("not supported");
+    // }
     
-    const raster = image.convertToRaster();
+    // const raster = image.convertToRaster();
     this.buffer.write(Command.GS_par_L_112());
-    this.buffer.writeUInt16LE(raster.length + 10);
+    this.buffer.writeUInt16LE(image.length + 10);
     this.buffer.write([ 0x30, 0x70, 0x30, 0x01, 0x01, 0x31 ]);
-    this.buffer.writeUInt16LE(img_data.width);
-    this.buffer.writeUInt16LE(img_data.height);
-    this.buffer.write(raster);
+    this.buffer.writeUInt16LE(width);
+    this.buffer.writeUInt16LE(height);
+    this.buffer.write(image);
     return this;
   }
 

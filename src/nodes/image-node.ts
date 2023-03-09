@@ -1,8 +1,9 @@
 import { XMLNode } from "../xml-node";
 import { BufferBuilder, RASTER_MODE } from "../buffer-builder";
-import ndarray from "ndarray";
-import Image from "../image";
-import { PNG } from "pngjs";
+// import ndarray from "ndarray";
+// import Image from "../image";
+// import { createCanvas, Image } from 'canvas';
+// import { PNG } from "pngjs";
 
 export default class ImageNode extends XMLNode {
   constructor(node: any) {
@@ -10,16 +11,16 @@ export default class ImageNode extends XMLNode {
   }
 
   public open(bufferBuilder: BufferBuilder): BufferBuilder {
-    const img_data = PNG.sync.read(
-      Buffer.from(this.content.replace(/&#x2F/g, '/').slice("data:image/png;base64,".length), "base64")
-    );
+    // const img_data = PNG.sync.read(
+    //   Buffer.from(this.content.replace(/&#x2F/g, '/').slice("data:image/png;base64,".length), "base64")
+    // );
 
-    const pixels = ndarray(
-      new Uint8Array(img_data.data),
-      [img_data.width | 0, img_data.height | 0, 4],
-      [4, (4 * img_data.width) | 0, 1],
-      0
-    );
+    // const pixels = ndarray(
+    //   new Uint8Array(img_data.data),
+    //   [img_data.width | 0, img_data.height | 0, 4],
+    //   [4, (4 * img_data.width) | 0, 1],
+    //   0
+    // );
 
     let mode;
     switch (this.attributes.mode) {
@@ -35,7 +36,9 @@ export default class ImageNode extends XMLNode {
         mode = RASTER_MODE.NORMAL;
     }
 
-    bufferBuilder.storeImage(new Image(pixels), mode, img_data);
+    const width = parseInt(this.attributes.width, 10);
+    const height = parseInt(this.attributes.height, 10);
+    bufferBuilder.storeImage(this.content, mode, width, height);
     return bufferBuilder;
   }
 
