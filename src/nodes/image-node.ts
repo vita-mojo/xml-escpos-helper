@@ -35,10 +35,8 @@ export default class ImageNode extends XMLNode {
           default:
             mode = RASTER_MODE.NORMAL;
         }
-  
-        const width = parseInt(this.attributes.width, 10);
-        const height = parseInt(this.attributes.height, 10);
-        bufferBuilder.storeImage(rasterImage, mode, width, height);
+
+        bufferBuilder.storeImage(rasterImage, mode, imageData.width, imageData.height);
         resolve(bufferBuilder);
       };
     })
