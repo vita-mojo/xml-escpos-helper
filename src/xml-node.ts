@@ -25,13 +25,13 @@ export abstract class XMLNode {
 
   public abstract close(bufferBuilder: BufferBuilder): BufferBuilder;
 
-  public draw(bufferBuilder: BufferBuilder): BufferBuilder {
+  public async draw(bufferBuilder: BufferBuilder): Promise<BufferBuilder> {
 
     // open tag
-    this.open(bufferBuilder);
+    await this.open(bufferBuilder);
 
     if (this.children.length > 0) {
-      this.children.forEach(child => child.draw(bufferBuilder));
+      this.children.forEach(async child => await child.draw(bufferBuilder));
     }
 
     // close tag

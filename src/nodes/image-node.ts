@@ -2,7 +2,8 @@ import { XMLNode } from "../xml-node";
 import { BufferBuilder, RASTER_MODE } from "../buffer-builder";
 // import ndarray from "ndarray";
 // import Image from "../image";
-// import { createCanvas, Image } from 'canvas';
+import { createCanvas, Image } from 'canvas';
+import { monoImage } from "../monoImage";
 // import { PNG } from "pngjs";
 
 export default class ImageNode extends XMLNode {
@@ -10,7 +11,38 @@ export default class ImageNode extends XMLNode {
     super(node);
   }
 
-  public open(bufferBuilder: BufferBuilder): BufferBuilder {
+  public async open(bufferBuilder: BufferBuilder): Promise<BufferBuilder> {
+    const image = new Image();
+    image.src = this.content.replace(/&#x2F/g, '/');
+    return new Promise((resolve, reject) => {
+      image.onload = () => {
+        const canvas = createCanvas(544, 104);
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0, image.width, image.height);
+        const imageData = context.getImageData(0, 0, image.width, image.height);
+        const rasterImage = monoImage(imageData, 1);
+  
+        let mode;
+        switch (this.attributes.mode) {
+          case 'NORMAL':
+            mode = RASTER_MODE.NORMAL; break;
+          case 'DW':
+            mode = RASTER_MODE.DOUBLE_WIDTH; break;
+          case 'DH':
+            mode = RASTER_MODE.DOUBLE_HEIGHT; break;
+          case 'DWH':
+            mode = RASTER_MODE.DOUBLE_WIDTH_HEIGHT; break;
+          default:
+            mode = RASTER_MODE.NORMAL;
+        }
+  
+        const width = parseInt(this.attributes.width, 10);
+        const height = parseInt(this.attributes.height, 10);
+        bufferBuilder.storeImage(rasterImage, mode, width, height);
+        resolve(bufferBuilder);
+      };
+    })
+
     // const img_data = PNG.sync.read(
     //   Buffer.from(this.content.replace(/&#x2F/g, '/').slice("data:image/png;base64,".length), "base64")
     // );
@@ -21,25 +53,6 @@ export default class ImageNode extends XMLNode {
     //   [4, (4 * img_data.width) | 0, 1],
     //   0
     // );
-
-    let mode;
-    switch (this.attributes.mode) {
-      case 'NORMAL':
-        mode = RASTER_MODE.NORMAL; break;
-      case 'DW':
-        mode = RASTER_MODE.DOUBLE_WIDTH; break;
-      case 'DH':
-        mode = RASTER_MODE.DOUBLE_HEIGHT; break;
-      case 'DWH':
-        mode = RASTER_MODE.DOUBLE_WIDTH_HEIGHT; break;
-      default:
-        mode = RASTER_MODE.NORMAL;
-    }
-
-    const width = parseInt(this.attributes.width, 10);
-    const height = parseInt(this.attributes.height, 10);
-    bufferBuilder.storeImage(this.content, mode, width, height);
-    return bufferBuilder;
   }
 
   public close(bufferBuilder: BufferBuilder): BufferBuilder {

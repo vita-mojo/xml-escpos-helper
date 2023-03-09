@@ -22,9 +22,9 @@ export class TemplateParser {
     }
   }
 
-  public parser<T>(template: string, scope: T): BufferBuilder {
+  public async parser<T>(template: string, scope: T): Promise<BufferBuilder> {
     const compiledTemplate = this.handlebars.compile<T>(template);
     const xml = compiledTemplate(scope);
-    return new XMLParser().parser(xml);
+    return await new XMLParser().parser(xml);
   }
 }

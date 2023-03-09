@@ -37,6 +37,7 @@
   "dependencies": {
     "@types/pngjs": "^6.0.1",
     "buffer": "^6.0.3",
+    "canvas": "^2.11.0",
     "handlebars": "^4.7.7",
     "mutable-buffer": "2.0.3",
     "ndarray": "^1.0.19",

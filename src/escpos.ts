@@ -9,13 +9,13 @@ export class EscPos {
     this.templateParser = new TemplateParser(handlebarsHelpers);
   }
 
-  public getBufferFromTemplate(template: string, data: any): number[] {
-    return this.templateParser.parser(template, data).build();
+  public async getBufferFromTemplate(template: string, data: any): Promise<number[]> {
+    return (await this.templateParser.parser(template, data)).build();
   }
 
-  public static getBufferFromXML(xml: string): number[] {
+  public static async getBufferFromXML(xml: string): Promise<number[]> {
     let xmlParser = new XMLParser();
-    return xmlParser.parser(xml).build();
+    return (await xmlParser.parser(xml)).build();
   }
 
   public static getBufferBuilder(): BufferBuilder {

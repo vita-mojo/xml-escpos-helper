@@ -1,3 +1,5 @@
+import { ImageData } from "canvas";
+
 export const monoImage = (imgdata: ImageData, ht: number, brightness = 1) => {
     var x = String.fromCharCode,
         m8 = [

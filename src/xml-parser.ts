@@ -5,12 +5,12 @@ import { NodeFactory } from './node-factory';
 
 export class XMLParser {
 
-  public parser(xml: string): BufferBuilder {
+  public async parser(xml: string): Promise<BufferBuilder> {
     let parsedXML = parser(xml);
     return this.compile(parsedXML);
   }
 
-  private compile(parsedXML: any): BufferBuilder {
+  private async compile(parsedXML: any): Promise<BufferBuilder> {
     let bufferBuilder = new BufferBuilder();
     let rootNode = this.adapter(parsedXML.root, null);
     return rootNode.draw(bufferBuilder);
