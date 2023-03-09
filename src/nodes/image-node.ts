@@ -2,7 +2,7 @@ import { XMLNode } from "../xml-node";
 import { BufferBuilder, RASTER_MODE } from "../buffer-builder";
 // import ndarray from "ndarray";
 // import Image from "../image";
-import { createCanvas, Image } from 'canvas';
+import Canvas, { createCanvas } from 'canvas';
 import { monoImage } from "../monoImage";
 // import { PNG } from "pngjs";
 
@@ -18,7 +18,7 @@ export default class ImageNode extends XMLNode {
       image.onload = () => {
         const canvas = createCanvas(544, 104);
         const context = canvas.getContext('2d');
-        context.drawImage(image, 0, 0, image.width, image.height);
+        context.drawImage(<Canvas.Image><unknown>image, 0, 0, image.width, image.height);
         const imageData = context.getImageData(0, 0, image.width, image.height);
         const rasterImage = monoImage(imageData, 1);
   
