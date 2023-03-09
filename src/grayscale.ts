@@ -293,5 +293,27 @@ export const grayImage = (imgdata: ImageData, brightness: number = 1) => {
             }
         }
     }
+    return toBase64Binary(r.join(""));
+}
+
+function toBase64Binary(s: string) {
+    var l = s.length,
+        r = new Array(((l + 2) / 3) << 2),
+        t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+        p = (3 - (l % 3)) % 3,
+        j = 0,
+        i = 0,
+        n;
+    s += "\x00\x00";
+    while (i < l) {
+        n = (s.charCodeAt(i++) << 16) | (s.charCodeAt(i++) << 8) | s.charCodeAt(i++);
+        r[j++] = t.charAt((n >> 18) & 63);
+        r[j++] = t.charAt((n >> 12) & 63);
+        r[j++] = t.charAt((n >> 6) & 63);
+        r[j++] = t.charAt(n & 63);
+    }
+    while (p--) {
+        r[--j] = "=";
+    }
     return r.join("");
 }
