@@ -128,26 +128,23 @@ class Image {
   }
 
   public convertToRaster() {
-    var width = this.size.width;
-    var height = this.size.height;
-    const paddedWidth = Math.ceil(width / 8) * 8;
     const raster = [];
+    const width = this.size.width;
+    const height = this.size.height;
+    const data = this.data;
     for (let y = 0; y < height; y++) {
-      for (let x = 0; x < paddedWidth; x += 8) {
-        let byte = 0;
-        for (let i = 0; i < 8; i++) {
-          const px = x + i;
-          if (px < width) {
-            const idx = (width * y + px) << 2;
-            const alpha = this.data[idx + 3];
-            const pixel = alpha < 128 ? 0 : 1;
-            byte |= pixel << (7 - i);
-          }
+      for (let x = 0; x < width; x++) {
+        const idx = (width * y + x) << 2;
+        const alpha = data[idx + 3];
+        const pixel = alpha < 128 ? 0 : 1;
+        if (y === 0 && x === 0) {
+          raster.push(width, 0x00);
+          raster.push(height, 0x00);
         }
-        raster.push(byte);
+        raster.push(pixel);
       }
     }
-    return [paddedWidth, 0x00, height, 0x00, ...raster];
+    return raster;
   }
 }
 
