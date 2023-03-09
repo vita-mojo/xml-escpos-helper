@@ -237,13 +237,14 @@ export class BufferBuilder {
     if (!(image instanceof Image)) {
       throw new TypeError("not supported");
     }
-    const raster = image.toBitmap(72);
+    
+    const raster = image.convertToRaster();
     this.buffer.write(Command.GS_par_L_112());
-    this.buffer.writeUInt16LE(raster.data.length + 10);
+    this.buffer.writeUInt16LE(raster.length + 10);
     this.buffer.write([ 0x30, 0x70, 0x30, 0x01, 0x01, 0x31 ]);
     this.buffer.writeUInt16LE(img_data.width);
     this.buffer.writeUInt16LE(img_data.height);
-    this.buffer.write(raster.data);
+    this.buffer.write(raster);
     return this;
   }
 

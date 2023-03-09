@@ -2,9 +2,7 @@ import { XMLNode } from "../xml-node";
 import { BufferBuilder, RASTER_MODE } from "../buffer-builder";
 import ndarray from "ndarray";
 import Image from "../image";
-import pngjs from "pngjs";
-
-const PNG = pngjs.PNG;
+import { PNG } from "pngjs";
 
 export default class ImageNode extends XMLNode {
   constructor(node: any) {
