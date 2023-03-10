@@ -64,7 +64,7 @@ export const monoImage = (imgdata: ImageData, ht: number, brightness = 1) => {
             }
         }
     }
-    return r.join("");
+    return toBase64Binary(r.join(""));
 }
 
 function toBase64Binary(s: string) {
