@@ -16,7 +16,7 @@ export default class ImageNode extends XMLNode {
     image.src = this.content.replace(/&#x2F/g, '/');
     return new Promise((resolve, reject) => {
       image.onload = () => {
-        const canvas = createCanvas(544, 104);
+        const canvas = createCanvas(image.width, image.height);
         const context = canvas.getContext('2d');
         context.drawImage(<Canvas.Image><unknown>image, 0, 0, image.width, image.height);
         const imageData = context.getImageData(0, 0, image.width, image.height);
