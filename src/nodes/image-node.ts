@@ -20,7 +20,7 @@ export default class ImageNode extends XMLNode {
         const context = canvas.getContext('2d');
         context.drawImage(<Canvas.Image><unknown>image, 0, 0, image.width, image.height);
         const imageData = context.getImageData(0, 0, image.width, image.height);
-        const rasterImage = monoImage(imageData, 0);
+        const rasterImage = monoImage(imageData, 1);
   
         let mode;
         switch (this.attributes.mode) {
