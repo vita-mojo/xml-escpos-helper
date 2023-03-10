@@ -239,18 +239,17 @@ export class BufferBuilder {
     // }
     
     // const raster = image.convertToRaster();
-    this.buffer.write(Command.GS_par_L_112());
-    this.buffer.writeUInt16LE(image.length + 10);
-    this.buffer.write([ 0x30, 0x70, 0x30, 0x01, 0x01, 0x31 ]);
+    this.buffer.write(Command.GS_v0(mode));
     this.buffer.writeUInt16LE(width);
     this.buffer.writeUInt16LE(height);
     this.buffer.write(image);
     return this;
+    
   }
 
   public printImage(): BufferBuilder {
-    this.buffer.write(Command.GS_par_L_112());
-    this.buffer.write([0x02, 0x00, 0x30, 0x02]);
+    // this.buffer.write(Command.GS_par_L_112());
+    // this.buffer.write([0x02, 0x00, 0x30, 0x02]);
     return this;
   }
 
