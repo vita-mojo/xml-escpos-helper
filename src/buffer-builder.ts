@@ -344,7 +344,7 @@ export enum RASTER_MODE {
 }
 
 export enum ENCODING {
-  UTF8 = 0x0E
+  UTF8 = 0x40
 }
 
 export enum COLOR {
