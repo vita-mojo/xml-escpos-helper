@@ -7,15 +7,27 @@ export type HandlebarsHelpers = Array<{
   delegate: (...args: Array<unknown>) => string
 }>;
 
+export type HandlebarsOptions = {
+  acceptHash?: boolean
+};
+
 export class TemplateParser {
   private handlebars: typeof Handlebars;
 
-  constructor(handlebarsHelpers?: HandlebarsHelpers) {
+  static parseArgs = (name: string, args: Array<unknown> = []) =>
+    args.map((arg) => (typeof arg === 'object' && arg?.['name'] === name ? undefined : arg));
+
+  constructor(handlebarsHelpers?: HandlebarsHelpers, options?: HandlebarsOptions) {
     this.handlebars = Handlebars;
     if (handlebarsHelpers) {
       this.handlebars.registerHelper(
         handlebarsHelpers.reduce(
-          (acc, helper) => (acc[helper.name] = helper.delegate, acc),
+          (acc, helper) => (
+            acc[helper.name] = options?.acceptHash
+              ? helper.delegate
+              : (...args: unknown[]) => helper.delegate(...(TemplateParser.parseArgs(helper.name, args))),
+            acc
+          ),
           {}
         )
       );

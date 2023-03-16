@@ -1,12 +1,12 @@
-import { TemplateParser, HandlebarsHelpers } from './template-parser';
+import { TemplateParser, HandlebarsHelpers, HandlebarsOptions } from './template-parser';
 import { XMLParser } from './xml-parser';
 import { BufferBuilder } from './buffer-builder';
 
 export class EscPos {
   templateParser: TemplateParser;
 
-  constructor(handlebarsHelpers: HandlebarsHelpers = []) {
-    this.templateParser = new TemplateParser(handlebarsHelpers);
+  constructor(handlebarsHelpers: HandlebarsHelpers = [], options?: HandlebarsOptions) {
+    this.templateParser = new TemplateParser(handlebarsHelpers, options);
   }
 
   public getBufferFromTemplate(template: string, data: any): number[] {
