@@ -2,7 +2,7 @@ import { XMLNode } from "../xml-node";
 import { BufferBuilder, RASTER_MODE } from "../buffer-builder";
 import ndarray from "ndarray";
 import Image from "../image";
-import pngjs from "pngjs";
+import pngjs from "pngjs/browser";
 
 const PNG = pngjs.PNG;
 

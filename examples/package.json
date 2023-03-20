@@ -10,7 +10,6 @@
     "clean": "rm -rf ./dist && rm -rf ./tsconfig.build.tsbuildinfo",
     "compile": "yarn clean && tsc  -p ./tsconfig.json",
     "print:basic": "yarn compile && yarn node ./dist/basic.js",
-    "print:image": "yarn compile && yarn node ./dist/printImage.js",
     "print:table": "yarn compile && yarn node ./dist/printTable.js",
     "print:barcode": "yarn compile && yarn node ./dist/printBarcode.js"
   },
